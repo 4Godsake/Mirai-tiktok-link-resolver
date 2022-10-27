@@ -1,0 +1,30 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.6.21'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.6.21'
+
+    id 'net.mamoe.mirai-console' version '2.12.3'
+
+}
+
+group = 'cn.rapdog'
+version = '0.1.0'
+
+repositories {
+    maven { url 'https://maven.aliyun.com/repository/public' }
+    mavenCentral()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/com.alibaba/fastjson
+    implementation 'com.alibaba:fastjson:2.0.15'
+    "shadowLink"("com.alibaba:fastjson")
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    "shadowLink"("org.projectlombok:lombok")
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    // https://mvnrepository.com/artifact/cn.hutool/hutool-core
+    implementation 'cn.hutool:hutool-all:5.8.8'
+    "shadowLink"("cn.hutool:hutool-all")
+
+
+}
