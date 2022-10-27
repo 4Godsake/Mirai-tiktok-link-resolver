@@ -1,2 +1,23 @@
 # Mirai-tiktok-link-resolver
 Mirai-console插件，用于解析某音视频分享链接
+
+## 开始使用
+
+插件需要以 [Mirai-Console](https://github.com/mamoe/mirai)
+
+为基础，你可以下载 [MCL](https://github.com/iTXTech/mirai-console-loader/releases) 作为你的Mirai插件载入器
+
+## 使用方法
+
+
+
+将插件放到MCL的plugin目录下，启动mirai-console即可使用，群中有抖音分享链接消息时会自动解析视频并上传
+
+
+目前仅实现基本功能，后续会持续更新
+
+更新计划：
+1.配置功能开启的群
+2.可配置视频消息通过合并转发的方式发出
+3.可配置视频上传目录
+4.可配置定期清理此插件在群文件中上传的文件
