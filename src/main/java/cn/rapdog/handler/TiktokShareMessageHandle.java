@@ -2,7 +2,7 @@ package cn.rapdog.handler;
 
 
 import cn.rapdog.TiktokLinkResolver;
-import cn.rapdog.uitls.TiktokUtils;
+import cn.rapdog.utils.TiktokUtils;
 import kotlin.coroutines.CoroutineContext;
 import net.mamoe.mirai.event.EventHandler;
 import net.mamoe.mirai.event.ListeningStatus;
@@ -84,7 +84,7 @@ public class TiktokShareMessageHandle extends SimpleListenerHost {
                 String shareUrl = shareTextToUrl(messageStr);
                 TiktokUtils.checkStringNotEmpty(shareUrl, "分享链接解析失败，请检查链接是否正确");
                 String downLoadPath = Paths.get(TiktokLinkResolver.INSTANCE.getDataFolderPath().toString(),
-                        event.getSender().getNick()+"的分享" + System.currentTimeMillis() + ".mp4").toString();
+                        event.getSender().getId()+"的分享" + System.currentTimeMillis() + ".mp4").toString();
                 File video = TiktokUtils.downloadByShareUrl(shareUrl, downLoadPath);
                 LOGGER.info("视频下载成功，缓存目录：{"+downLoadPath+"}文件位置：{"+video.getAbsolutePath()+"} —— 文件大小：{"+video.getTotalSpace()+"}");
                 try (ExternalResource resource = ExternalResource.create(video)) {

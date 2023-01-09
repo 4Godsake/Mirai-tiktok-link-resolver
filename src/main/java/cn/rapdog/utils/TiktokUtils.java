@@ -1,4 +1,4 @@
-package cn.rapdog.uitls;
+package cn.rapdog.utils;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
