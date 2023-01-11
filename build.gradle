@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'cn.rapdog'
-version = '0.1.0'
+version = '0.2.0'
 
 repositories {
     maven { url 'https://maven.aliyun.com/repository/public' }
@@ -23,8 +23,24 @@ dependencies {
     "shadowLink"("org.projectlombok:lombok")
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     // https://mvnrepository.com/artifact/cn.hutool/hutool-core
-    implementation 'cn.hutool:hutool-all:5.8.8'
+    implementation 'cn.hutool:hutool-all:5.8.11'
     "shadowLink"("cn.hutool:hutool-all")
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    implementation 'org.seleniumhq.selenium:selenium-java:4.7.2'
+    "shadowLink"("org.seleniumhq.selenium:selenium-java")
+    // https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager
+    implementation 'io.github.bonigarcia:webdrivermanager:5.3.1'
+    "shadowLink"("io.github.bonigarcia:webdrivermanager")
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-pool2
+    implementation 'org.apache.commons:commons-pool2:2.11.1'
+    "shadowLink"("org.apache.commons:commons-pool2")
 
 
+    // https://mvnrepository.com/artifact/junit/junit
+    testImplementation 'junit:junit:4.13.2'
+
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
 }
