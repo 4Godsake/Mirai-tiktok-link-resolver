@@ -34,26 +34,28 @@ public class TiktokUtils {
     private static String getRealUrl(String shareUrl) throws BusiException {
         LOGGER.info("原抖音分享链接为:" + shareUrl);
         String videoUrl = "";
-        try (WebDriverPool webDriverPool = WebDriverPool.getInstance()) {
-            WebDriver driver = null;
-            try {
-                driver = webDriverPool.borrowObject();
-                driver.get(shareUrl);
-                WebElement element = driver.findElement(By.id("RENDER_DATA"));
-                String jsonStr = URLUtil.decode(element.getAttribute("innerHTML"));
-                JSONObject jo = JSON.parseObject(jsonStr);
-                videoUrl = jo.getObject("42", JSONObject.class)
-                             .getObject("aweme", JSONObject.class)
-                             .getObject("detail", JSONObject.class)
-                             .getObject("video", JSONObject.class)
-                             .get("playApi").toString().replace("//", "");
-                LOGGER.info("抖音分享链接解析结果:" + videoUrl);
-            } catch (Exception e) {
-                LOGGER.error("抖音分享链接解析失败", e);
-            } finally {
-                if (driver != null) {
-                    webDriverPool.returnObject(driver);
-                }
+        WebDriver driver = null;
+        try {
+            driver = WebDriverPool.getInstance().borrowObject();
+            driver.get(shareUrl);
+            if (driver.getTitle().contains("验证码")){
+                throw new BusiException("服务被限制，跳转验证码页面，可能是访问频率较高或浏览器版本问题，请过会再试");
+            }
+            WebElement element = driver.findElement(By.id("RENDER_DATA"));
+            String jsonStr = URLUtil.decode(element.getAttribute("innerHTML"));
+            JSONObject jo = JSON.parseObject(jsonStr);
+            videoUrl = "https:"+jo.getObject("42", JSONObject.class)
+                    .getObject("aweme", JSONObject.class)
+                    .getObject("detail", JSONObject.class)
+                    .getObject("video", JSONObject.class)
+                    .get("playApi").toString();
+            LOGGER.info("抖音分享链接解析结果:" + videoUrl);
+        } catch (Exception e) {
+            LOGGER.error("抖音分享链接解析失败", e);
+            throw new BusiException("抖音分享链接解析异常:" + e.getMessage());
+        } finally {
+            if (driver != null) {
+                WebDriverPool.getInstance().returnObject(driver);
             }
         }
         return videoUrl;

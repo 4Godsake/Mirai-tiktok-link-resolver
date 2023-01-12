@@ -1,6 +1,7 @@
 package cn.rapdog;
 
 import cn.rapdog.handler.TiktokShareMessageHandle;
+import cn.rapdog.selenium.pool.WebDriverPool;
 import net.mamoe.mirai.console.plugin.jvm.JavaPlugin;
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescriptionBuilder;
 import net.mamoe.mirai.event.GlobalEventChannel;
@@ -30,6 +31,8 @@ public final class TiktokLinkResolver extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        getLogger().info("closing ChromeDrivePool...");
+        WebDriverPool.getInstance().close();
         getLogger().info("tiktok-link-resolver Plugin quiting...");
     }
 

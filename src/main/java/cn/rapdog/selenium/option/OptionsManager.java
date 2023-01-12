@@ -13,7 +13,6 @@ public class OptionsManager {
      * @return
      */
     public static ChromeOptions getChromeOptions() {
-        //System.setProperty("webdriver.chrome.driver", webDriverBean.getDriverPath());
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-logging");
         // 字符编码 utf-8 支持中文字符
@@ -24,7 +23,8 @@ public class OptionsManager {
         options.addArguments("--disable-blink-features=AutomationControlled");
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
         // 设置无gui 开发时仍是不要加，能够看到浏览器效果
-        //options.addArguments("--headless");
+        options.addArguments("--headless");
+        options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 Edg/108.0.1462.76");
         options.addArguments("--disable-gpu");//禁止gpu渲染
         options.addArguments("--no-sandbox");//关闭沙盒模式
         options.addArguments("--disable-dev-shm-usage");
@@ -62,10 +62,11 @@ public class OptionsManager {
         // 字符编码 utf-8 支持中文字符
         options.addArguments("lang=zh_CN.UTF-8");
         // 设置容许弹框
-        options.addArguments("disable-infobars", "disable-web-security");
         // 驱动自动控制软件标识,这两条配置在edge不生效，已放弃适配edge
         options.addArguments("--disable-blink-features=AutomationControlled");
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+
+
         // 设置无gui 开发时仍是不要加，能够看到浏览器效果
         options.addArguments("--headless");
         options.addArguments("--disable-gpu");//禁止gpu渲染
